@@ -32,7 +32,6 @@ module "vm" {
   }
 
   userdata = templatefile("${path.module}/templates/userdata.yaml.tmpl", {
-    custom_text = var.custom_text
     hostname    = var.hostname
     sshkey  = var.sshkey
   })
