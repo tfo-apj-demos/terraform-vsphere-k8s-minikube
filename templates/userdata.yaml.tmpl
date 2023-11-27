@@ -1,7 +1,12 @@
 #cloud-config
 autoinstall:
+  version: 1
   packages:
     - helm
+  identity:
+    username: ubuntu
+    password: '$1$hmkWx813$9v/LYZtdzs6C/AMBY91rj/'
+    hostname: ${hostname}
   ssh:
     install-server: true
     allow-pw: true
