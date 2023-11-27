@@ -65,6 +65,7 @@ variable "backup_policy" {
     condition     = contains(["daily", "weekly", "monthly"], var.backup_policy)
     error_message = "Backup policy must be one of 'daily', 'weekly', or 'monthly'."
   }
+  default = "daily"
 }
 
 variable "folder_path" {
