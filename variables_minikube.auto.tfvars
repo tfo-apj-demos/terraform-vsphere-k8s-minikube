@@ -5,7 +5,7 @@ environment = "dev"
 storage_profile = "performance"
 backup_policy = "daily"
 tier = "gold"
-size = "large"
+size = "medium"
 
 security_profile = "web-server"
 
