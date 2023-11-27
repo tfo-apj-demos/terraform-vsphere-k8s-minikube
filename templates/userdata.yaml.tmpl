@@ -1,17 +1,6 @@
 #cloud-config
-autoinstall:
-  version: 1
-  packages:
-    - helm
-  identity:
-    username: ubuntu
-    password: '$1$w4dBmuv4$aI8GeEYOVkjQtA8JkXmR20'
-    hostname: ${hostname}
-  ssh:
-    install-server: true
-    allow-pw: true
-    authorized-keys:
-      - ${sshkey}
-  user-data:
-    disable_root: false
-    ssh_pwauth: true
+disable_root: false
+ssh_pwauth: true
+ssh_authorized_keys:
+  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8wNgHtY1Lao00trZ8XoweIxa4F9T/wekoP2e2VzZPq simon.lynch@hashicorp.com
+
