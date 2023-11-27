@@ -1,7 +1,7 @@
 hostname = "minikube"
 
 site = "sydney"
-environment = "prod"
+environment = "dev"
 storage_profile = "performance"
 backup_policy = "daily"
 tier = "gold"
