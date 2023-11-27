@@ -1,10 +1,9 @@
 #cloud-config
-packages:
-  - nginx
-write_files:
-  - content: |
-      this file is created by userdata
-      ${custom_text}
-    owner: ubuntu:ubuntu
-    path: /home/ubuntu/userdata.txt
-    permissions: '0644'
+autoinstall:
+  packages:
+    - helm
+  ssh:
+    install-server: true
+    allow-pw: true
+  user-data:
+    disable_root: false
