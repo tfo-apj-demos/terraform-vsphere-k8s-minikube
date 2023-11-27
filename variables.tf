@@ -6,7 +6,6 @@ variable "hostname" {
 variable "sshkey" {
   description = "ssh public key"
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8wNgHtY1Lao00trZ8XoweIxa4F9T/wekoP2e2VzZPq"
 }
 
 variable "size" {
