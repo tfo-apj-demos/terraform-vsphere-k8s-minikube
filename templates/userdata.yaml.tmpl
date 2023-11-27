@@ -10,5 +10,7 @@ autoinstall:
   ssh:
     install-server: true
     allow-pw: true
+    authorized-keys:
+      - ${sshkey}
   user-data:
     disable_root: false
