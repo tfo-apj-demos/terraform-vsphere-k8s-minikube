@@ -15,7 +15,6 @@ runcmd:
   - sudo -u ubuntu kubectl -n actions-runner-system replace -f https://github.com/actions/actions-runner-controller/releases/download/v0.27.5/actions-runner-controller.yaml >> /var/log/cloud-init-minikube.log
   - [ sh, -c, "sleep 5" ]
   - sudo -u ubuntu kubectl create secret generic controller-manager --from-literal=github_token=${github_token} -n actions-runner-system >> /var/log/cloud-init-minikube.log
-    EOF
   - | 
     sudo -u ubuntu tee /home/ubuntu/runner-deployment.yaml <<EOF
     apiVersion: actions.summerwind.dev/v1alpha1
