@@ -9,6 +9,7 @@ runcmd:
   - sudo snap install kubectl --classic
   - echo "starting docker" >> /var/log/cloud-init-minikube.log
   - sudo systemctl start docker
+  - echo "download minikube" >> /var/log/cloud-init-minikube.log
   - sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
   - echo "installing minikube" >> /var/log/cloud-init-minikube.log
   - sudo install minikube-linux-amd64 /usr/local/bin/minikube
