@@ -8,6 +8,13 @@ variable "sshkey" {
   type        = string
 }
 
+variable "github_token" {
+  description = "github token"
+  type        = string
+  sensitive = true
+}
+
+
 variable "size" {
   description = "T-shirt size for the VM (e.g., small, medium, large)"
   type        = string

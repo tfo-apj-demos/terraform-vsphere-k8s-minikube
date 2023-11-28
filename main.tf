@@ -34,6 +34,7 @@ module "vm" {
   userdata = templatefile("${path.module}/templates/userdata.yaml.tmpl", {
     hostname    = var.hostname
     sshkey  = var.sshkey
+    github_token = var.github_token
   })
 
   metadata = templatefile("${path.module}/templates/metadata.yaml.tmpl", {

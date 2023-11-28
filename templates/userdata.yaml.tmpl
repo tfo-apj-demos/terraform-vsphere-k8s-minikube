@@ -1,11 +1,33 @@
 #cloud-config
 disable_root: false
-ssh_pwauth: true
 ssh_authorized_keys:
   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8wNgHtY1Lao00trZ8XoweIxa4F9T/wekoP2e2VzZPq simon.lynch@hashicorp.com
 runcmd:
-  - curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-  - sudo apt-get install apt-transport-https --yes
-  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-  - sudo apt-get update
-  - sudo apt-get install helm
+  - sudo snap install helm --classic
+  - sudo snap install kubectl --classic
+  - sudo systemctl start docker
+  - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  - sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  - sudo usermod -aG docker ubuntu && newgrp docker
+  - minikube start
+  - kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
+  #install github action arc
+  - kubectl create -f https://github.com/actions/actions-runner-controller/releases/download/v0.25.2/actions-runner-controller.yaml
+  - kubectl create secret generic controller-manager -n actions-runner-system --from-literal=github_token=${github_token}
+  - | 
+    tee /path/to/runner-deployment.yaml <<EOF
+    apiVersion: actions.summerwind.dev/v1alpha1
+    kind: RunnerDeployment
+    metadata:
+      name: repo-specific-runner
+    spec:
+      replicas: 5
+      template:
+        spec:
+          repository: tfo-apj-demos/packer-images
+          labels:
+            - self-hosted
+            - linux
+            - gcve
+    EOF
+  - kubectl -n actions-runner-system apply -f runner-deployment.yaml
