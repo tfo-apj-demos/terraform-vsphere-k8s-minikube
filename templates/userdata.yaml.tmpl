@@ -7,10 +7,12 @@ runcmd:
   - sudo install minikube-linux-amd64 /usr/local/bin/minikube
   - echo "starting minikube" >> /var/log/cloud-init-minikube.log
   - sudo -u ubuntu minikube start >> /var/log/cloud-init-minikube.log
-  - [ sh, -c, "sleep 25" ]
+  - [ sh, -c, "sleep 10" ]
   - echo "applying github arc" >> /var/log/cloud-init-minikube.log
+  - sudo -u ubuntu kubectl create namespace actions-runner-system
   - sudo -u ubuntu kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml >> /var/log/cloud-init-minikube.log
-  - sudo -u ubuntu kubectl create -f https://github.com/actions/actions-runner-controller/releases/download/v0.25.2/actions-runner-controller.yaml >> /var/log/cloud-init-minikube.log
+  - [ sh, -c, "sleep 5" ]
+  - sudo -u ubuntu kubectl -n actions-runner-system replace -f https://github.com/actions/actions-runner-controller/releases/download/v0.27.5/actions-runner-controller.yaml >> /var/log/cloud-init-minikube.log
   - [ sh, -c, "sleep 5" ]
   - sudo -u ubuntu kubectl create secret generic controller-manager --from-literal=github_token=${github_token} -n actions-runner-system >> /var/log/cloud-init-minikube.log
     EOF
