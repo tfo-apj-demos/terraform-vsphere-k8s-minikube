@@ -11,7 +11,6 @@ runcmd:
   - sudo usermod -aG docker ubuntu && newgrp docker
   - minikube start
   - kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
-  #install github action arc
   - kubectl create -f https://github.com/actions/actions-runner-controller/releases/download/v0.25.2/actions-runner-controller.yaml
   - kubectl create secret generic controller-manager -n actions-runner-system --from-literal=github_token=${github_token}
   - | 
