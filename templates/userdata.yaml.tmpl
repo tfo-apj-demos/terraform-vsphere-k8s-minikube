@@ -7,7 +7,7 @@ runcmd:
   - sudo install minikube-linux-amd64 /usr/local/bin/minikube
   - echo "starting minikube" >> /var/log/cloud-init-minikube.log
   - sudo -u ubuntu minikube start >> /var/log/cloud-init-minikube.log
-  - [ sh, -c, "sleep 25" ]
+  - [ sh, -c, "sleep 30" ]
   - echo "applying github arc" >> /var/log/cloud-init-minikube.log
   - sudo -u ubuntu kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml >> /var/log/cloud-init-minikube.log
   - [ sh, -c, "sleep 120" ]
