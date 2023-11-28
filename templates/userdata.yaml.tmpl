@@ -7,8 +7,9 @@ runcmd:
   - sudo snap install helm --classic
   - echo "installing kubectl" >> /var/log/cloud-init-minikube.log
   - sudo snap install kubectl --classic
+  - echo "starting docker" >> /var/log/cloud-init-minikube.log
   - sudo systemctl start docker
-  - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  - sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
   - echo "installing minikube" >> /var/log/cloud-init-minikube.log
   - sudo install minikube-linux-amd64 /usr/local/bin/minikube
   - sudo usermod -aG docker ubuntu && newgrp docker
