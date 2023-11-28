@@ -24,6 +24,7 @@ runcmd:
       replicas: 5
       template:
         spec:
+          image: summerwind/actions-runner:ubuntu-22.04
           repository: tfo-apj-demos/packer-images
           labels:
             - self-hosted
