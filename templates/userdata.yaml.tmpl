@@ -3,18 +3,23 @@ disable_root: false
 ssh_authorized_keys:
   - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8wNgHtY1Lao00trZ8XoweIxa4F9T/wekoP2e2VzZPq simon.lynch@hashicorp.com
 runcmd:
+  - echo "installing helm" >> /var/log/cloud-init-minikube.log
   - sudo snap install helm --classic
+  - echo "installing kubectl" >> /var/log/cloud-init-minikube.log
   - sudo snap install kubectl --classic
   - sudo systemctl start docker
   - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  - echo "installing minikube" >> /var/log/cloud-init-minikube.log
   - sudo install minikube-linux-amd64 /usr/local/bin/minikube
   - sudo usermod -aG docker ubuntu && newgrp docker
+  - echo "starting minikube" >> /var/log/cloud-init-minikube.log
   - minikube start
+  - echo "applying arc" >> /var/log/cloud-init-minikube.log
   - kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
   - kubectl create -f https://github.com/actions/actions-runner-controller/releases/download/v0.25.2/actions-runner-controller.yaml
   - kubectl create secret generic controller-manager -n actions-runner-system --from-literal=github_token=${github_token}
   - | 
-    tee /path/to/runner-deployment.yaml <<EOF
+    tee $HOME/runner-deployment.yaml <<EOF
     apiVersion: actions.summerwind.dev/v1alpha1
     kind: RunnerDeployment
     metadata:
