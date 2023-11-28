@@ -13,9 +13,9 @@ runcmd:
   - sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
   - echo "installing minikube" >> /var/log/cloud-init-minikube.log
   - sudo install minikube-linux-amd64 /usr/local/bin/minikube
-  - sudo usermod -aG docker ubuntu && newgrp docker
+  - sudo usermod -aG docker ubuntu && newgrp docker >> /var/log/cloud-init-minikube.log
   - echo "starting minikube" >> /var/log/cloud-init-minikube.log
-  - minikube start
+  - sudo -u ubuntu minikube start >> /var/log/cloud-init-minikube.log
   - echo "applying arc" >> /var/log/cloud-init-minikube.log
   - kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
   - kubectl create -f https://github.com/actions/actions-runner-controller/releases/download/v0.25.2/actions-runner-controller.yaml
