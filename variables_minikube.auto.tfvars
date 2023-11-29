@@ -1,4 +1,4 @@
-hostname = "minikube"
+hostname = "minikube-gha"
 
 site = "sydney"
 environment = "dev"
