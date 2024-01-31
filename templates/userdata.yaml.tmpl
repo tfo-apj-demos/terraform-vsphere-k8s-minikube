@@ -21,13 +21,13 @@ runcmd:
     apiVersion: actions.summerwind.dev/v1alpha1
     kind: RunnerDeployment
     metadata:
-      name: repo-runner
+      name: org-runner
     spec:
-      replicas: 3
+      replicas: 5
       template:
         spec:
           image: tfoapjdemos/gha-runner-packer-ansible:latest
-          repository: tfo-apj-demos/packer-images
+          organization: tfo-apj-demos
           labels:
             - self-hosted
             - linux
