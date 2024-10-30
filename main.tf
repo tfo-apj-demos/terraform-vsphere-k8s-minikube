@@ -25,7 +25,7 @@ module "vm" {
     security_profile = var.security_profile
   }
   folder_path = var.folder_path
-  disk_0_size = 80
+  disk_0_size = 200
 
   networks = {
     "seg-general" = "dhcp"
