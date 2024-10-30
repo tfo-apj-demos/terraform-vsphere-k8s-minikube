@@ -22,9 +22,10 @@ locals {
 
   // Tier to resource pool mappings
   tiers = {
-    "gold"   = "workload"
-    "silver" = "workload"
-    "bronze" = "workload"
+    "gold"   = "Demo Workloads"
+    "silver" = "Demo Workloads"
+    "bronze" = "Demo Workloads"
+    "management" = "Demo Management"
   }
 
   // Storage profiles to datastore mappings
