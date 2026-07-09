@@ -6,7 +6,11 @@ data "hcp_packer_image" "docker-ubuntu-2204" {
 }
 
 module "vm" {
-  source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine"
+  # Vendored pets-safe copy of virtual-machine/vsphere 2.0.2 (was an UNPINNED github
+  # main source = the "cattle" module, which — with the HCP Packer latest template —
+  # wanted to destroy/recreate this VM). The vendored copy restores clone/guest_id/
+  # scsi_type/firmware to the VM ignore_changes so a rolled template never replaces it.
+  source = "./modules/vm-pet"
 
   template          = data.hcp_packer_image.docker-ubuntu-2204.cloud_image_id
   hostname          = var.hostname

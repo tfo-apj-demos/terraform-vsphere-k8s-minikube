@@ -1,7 +1,9 @@
 terraform {
   required_providers {
     vsphere = {
-      source  = "hashicorp/vsphere"
+      # vmware/vsphere 2.5.1 = identical republished twin of hashicorp/vsphere 2.5.1
+      # (same provider, new namespace) — pinned so the flip is a pure no-op version-wise.
+      source  = "vmware/vsphere"
       version = "2.5.1"
     }
     hcp = {
